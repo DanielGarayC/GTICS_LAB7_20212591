@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Obras</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Lista de Obras</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Duración (min)</th>
+            <th>Fecha de Estreno</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="obra : ${obras}">
+            <td th:text="${obra.id}"></td>
+            <td th:text="${obra.title}"></td>
+            <td th:text="${obra.duration}"></td>
+            <td th:text="${#dates.format(obra.releaseDate, 'yyyy-MM-dd')}"></td>
+            <td sec:authorize="hasAuthority('GERENTE')">
+                <a th:href="@{'/Obra/editar' }" class="btn btn-warning btn-sm">Editar</a>
+            </td>
+            <td sec:authorize="hasAuthority('GERENTE')">
+                <form th:action="@{'/Obra/eliminar'}" method="post"
+                      onsubmit="return confirm('¿Estás seguro que deseas eliminar esta obra?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/Obra/agregar" class="btn btn-primary">Agregar Película</a>
+</div>
+</body>
+</html>

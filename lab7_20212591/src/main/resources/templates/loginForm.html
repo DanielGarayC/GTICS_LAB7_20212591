@@ -10,14 +10,14 @@
     <div class="row">
         <div class="col-md-6 offset-md-3 mt-5">
             <h2>Acceso al sistema</h2>
-            <form action="#" th:action="@{/login}" method="post">
+            <form action="#" th:action="@{/submitLoginForm}" method="post">
                 <div class="form-group">
                     <label for="correo">Correo</label>
-                    <input type="email" id="correo" class="form-control" name="correo" required>
+                    <input type="email" id="correo" class="form-control" name="username" required>
                 </div>
                 <div class="form-group">
                     <label for="contrasena">Contraseña</label>
-                    <input type="password" id="contrasena" class="form-control" name="contrasena" required>
+                    <input type="password" id="contrasena" class="form-control" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
             </form>

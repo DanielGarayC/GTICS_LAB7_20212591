@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Salas</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2>Lista de Salas</h2>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Capacidad</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sala : ${salas}">
+      <td th:text="${sala.id}"></td>
+      <td th:text="${sala.name}"></td>
+      <td th:text="${sala.capacity}"></td>
+      <td sec:authorize="hasAuthority('GERENTE')">
+        <a th:href="@{'/Sala/editar?id=' + ${sala.id}}" class="btn btn-warning btn-sm">Editar</a>
+      </td>
+      <td sec:authorize="hasAuthority('GERENTE')">
+        <form th:action="@{'/Sala/eliminar'}" method="post"
+              onsubmit="return confirm('¿Estás seguro que deseas eliminar esta sala?');">
+          <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a href="/Sala/agregar" class="btn btn-primary">Agregar Sala</a>
+</div>
+</body>
+</html>

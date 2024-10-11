@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -36,7 +37,7 @@ public class Reservation {
 
     @NotNull
     @Column(name = "startDatetime", nullable = false)
-    private Instant startDatetime;
+    private Date startDatetime;
 
     @NotNull
     @Column(name = "endDatetime", nullable = false)

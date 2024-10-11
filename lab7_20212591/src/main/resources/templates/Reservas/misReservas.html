@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Reservas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Mis Reservas</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Película</th>
+            <th>Sala</th>
+            <th>Fecha y Hora</th>
+            <th>Asiento</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reserva : ${misReservas}">
+            <td th:text="${reserva.id}"></td>
+            <td th:text="${reserva.funcion.obra.title}"></td>
+            <td th:text="${reserva.funcion.room.name}"></td>
+            <td th:text="${#dates.format(reserva.start, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${reserva.seatNumber}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/Reserva/agregar" class="btn btn-primary">Reservar</a>
+</div>
+</body>
+</html>

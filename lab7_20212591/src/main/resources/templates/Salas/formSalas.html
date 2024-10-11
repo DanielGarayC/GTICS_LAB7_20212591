@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Agregar/Editar Sala</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 th:text="${sala.id == null ? 'Agregar Sala' : 'Editar Sala'}"></h2>
+
+  <form th:action="@{${sala.id == null ? '/Sala/agregar' : '/Sala/editar/' + ${sala.id}}}" method="post">
+    <div class="form-group">
+      <label for="nombre">Nombre de la Sala</label>
+      <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="capacidad">Capacidad</label>
+      <input type="number" class="form-control" id="capacidad" th:field="*{ca}" min="0" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      <span th:text="${sala.id == null ? 'Agregar' : 'Actualizar'}"></span>
+    </button>
+    <a href="/Sala/lista" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+</body>
+</html>

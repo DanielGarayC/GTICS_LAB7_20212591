@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -24,9 +25,14 @@ public class Funciones {
     @JoinColumn(name = "roomId")
     private Room room;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "obraId")
+    private Obra obra;
+
     @NotNull
     @Column(name = "funcionDate", nullable = false)
-    private Instant funcionDate;
+    private Date funciondate;
 
     @Column(name = "availableSeats")
     private Integer availableSeats;

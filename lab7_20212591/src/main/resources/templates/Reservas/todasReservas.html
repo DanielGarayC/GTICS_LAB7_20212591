@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todas las Reservas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Todas las Reservas</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Película</th>
+            <th>Sala</th>
+            <th>Fecha y Hora</th>
+            <th>Asiento</th>
+            <th>Cancelar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reserva : ${reservas}">
+            <td th:text="${reserva.id}"></td>
+            <td th:text="${reserva.funcion.obra.title}"></td>
+            <td th:text="${reserva.funcion.room.name}"></td>
+            <td th:text="${#dates.format(reserva.startDatetime, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${reserva.roomSeat}"></td>
+            <td>
+                <form th:action="@{'/Reserva/cancelar'}" method="post"
+                      onsubmit="return confirm('¿Estás seguro que deseas cancelar esta reserva?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

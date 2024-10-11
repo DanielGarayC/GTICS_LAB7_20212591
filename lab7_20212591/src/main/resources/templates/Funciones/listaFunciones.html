@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Funciones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Lista de Funciones</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Película</th>
+            <th>Sala</th>
+            <th>Fecha y Hora</th>
+            <th>Asientos Disponibles</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="funcion : ${funciones}">
+            <td th:text="${funcion.id}"></td>
+            <td th:text="${funcion.obra.title}"></td>
+            <td th:text="${funcion.room.name}"></td>
+            <td th:text="${#dates.format(funcion.funciondate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${funcion.availableSeats}"></td>
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{'/Funcion/editar?id=' + ${funcion.id}}" class="btn btn-warning btn-sm">Editar</a>
+            </td>
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <form th:action="@{'/Funcion/eliminar/' + ${funcion.id}}" method="post"
+                      onsubmit="return confirm('¿Estás seguro que deseas eliminar esta función?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/Funcion/agregar" class="btn btn-primary">Agregar Proyección</a>
+</div>
+</body>
+</html>
