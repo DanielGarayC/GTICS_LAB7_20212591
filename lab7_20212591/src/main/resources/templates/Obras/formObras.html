@@ -11,12 +11,12 @@
 
     <form th:action="@{${obra.id == null ? '/Obra/agregar' : '/Obra/editar/' + ${obra.id}}}" th:object="${obra}" method="post">
         <div class="form-group">
-            <label for="titulo">Nombre de la Sala</label>
+            <label for="titulo">Titulo de la Obra</label>
             <input type="text" class="form-control" id="titulo" th:field="*{title}" required>
         </div>
 
         <div class="form-group">
-            <label for="capacidad">Capacidad</label>
+            <label for="capacidad">Duración</label>
             <input type="number" class="form-control" id="capacidad" th:field="*{duration}" min="0" required>
         </div>
 
