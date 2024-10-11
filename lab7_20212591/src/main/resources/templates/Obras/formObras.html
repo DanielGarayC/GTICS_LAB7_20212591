@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Obra</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 th:text="${obra.id == null ? 'Agregar Obra' : 'Editar Obra'}"></h2>
+
+    <form th:action="@{${obra.id == null ? '/Obra/agregar' : '/Obra/editar/' + ${obra.id}}}" th:object="${obra}" method="post">
+        <div class="form-group">
+            <label for="titulo">Nombre de la Sala</label>
+            <input type="text" class="form-control" id="titulo" th:field="*{title}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="capacidad">Capacidad</label>
+            <input type="number" class="form-control" id="capacidad" th:field="*{duration}" min="0" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <span th:text="${sala.id == null ? 'Agregar' : 'Actualizar'}"></span>
+        </button>
+        <a href="/Sala/lista" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>
